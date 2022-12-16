@@ -49,7 +49,7 @@ if __name__ == '__main__':
 
     model = LinearRegression()  # an example
 
-    bot = telebot.TeleBot('Bot token from BotFather')  # ('Bot token from BotFather')
+    bot = telebot.TeleBot('Bot token from BotFather')
 
     you = TeleYou(bot)
     opponent = SmartOpponent(you, model)
