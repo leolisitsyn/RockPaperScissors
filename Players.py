@@ -9,7 +9,7 @@ class Player():
     def __init__(self):
         self.moves = []
 
-    def move(self):
+    def move(self, *args):
         pass
 
     def clear_moves(self):
@@ -17,7 +17,7 @@ class Player():
 
 
 class You(Player):
-    """First player under your control"""
+    """Player under your control"""
 
     def __init__(self):
         super().__init__()
@@ -59,7 +59,8 @@ class RandomPlayer(Player):
 class AlmostRandomPlayer(Player):
     """Player making moves with predefined probabilities"""
 
-    def __init__(self, *probabilities_of_move):
+    def __init__(self, probabilities_of_move: list):
+        """probabilities of moves: list of int, for example [33, 33, 33]"""
         super().__init__()
         self.num_list = [0 for _ in range(probabilities_of_move[0])] + \
                         [1 for _ in range(probabilities_of_move[1])] + \
@@ -118,15 +119,15 @@ class QuadSlidingPlayer(Player):
 
 
 class SmartOpponent(Player):
-    """Player learning your game stile"""
-    def __init__(self, opponent: Player, model):
+    """Player learning opponent's game stile"""
+    def __init__(self, player, model):
         super().__init__()
 
-        self.opponent = opponent
-        self.predictor = Predictor(self, opponent, model)
+        self.opponent = player
+        self.predictor = Predictor(player, self, model)
 
     def move(self):
-        if len(self.opponent.moves) < 5:
+        if len(self.opponent.moves) < 3:
             step = np.random.randint(0, 3)
         else:
             step = self.predictor.fit_predict()

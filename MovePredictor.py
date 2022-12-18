@@ -8,16 +8,17 @@ class Predictor():
         self.model = model
 
     def process_moves(self):
+        """creates matrix of players' moves X and matrix of winning response from second player"""
         pl_moves = self.player.moves.copy()
-        opp_moves = self.opponent.moves.copy()
+        print(pl_moves)
 
         length = len(pl_moves)
 
-        X = np.ones((length, length)) * -1
+        X = np.zeros((length, 3))
         y = np.zeros((length - 1, 3))
 
         for i in range(length):
-            X[i][:i + 1] = pl_moves[:i + 1][::-1]
+            X[i][pl_moves[i]] = 1
 
         for i in range(length - 1):
             if pl_moves[i] == 0:
@@ -30,6 +31,7 @@ class Predictor():
 
     def fit_predict(self):
         X, y = self.process_moves()
+
         self.model.fit(X[:-1], y)
         pred = self.model.predict([X[-1]])
 
