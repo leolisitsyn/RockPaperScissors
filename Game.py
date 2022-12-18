@@ -70,11 +70,11 @@ class Game():
 
 
 if __name__ == '__main__':
-    turns = 100
+    turns = 20
 
     model = LinearRegression()  # simple example
 
-    you = You()
+    you = ConstantPlayer(1)
     smart = SmartOpponent(you, model)
 
     game = Game(you, smart, turns)

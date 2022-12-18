@@ -10,7 +10,6 @@ class Predictor():
     def process_moves(self):
         """creates matrix of players' moves X and matrix of winning response from second player"""
         pl_moves = self.player.moves.copy()
-        print(pl_moves)
 
         length = len(pl_moves)
 
