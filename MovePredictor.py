@@ -32,6 +32,6 @@ class Predictor():
         X, y = self.process_moves()
 
         self.model.fit(X[:-1], y)
-        pred = self.model.predict([X[-1]])
+        pred = self.model.predict([X[:-1]])
 
         return np.argmax(pred)

@@ -1,4 +1,4 @@
-from Players import You, ConstantPlayer, SmartOpponent
+from Players import You, QuadSlidingPlayer, SmartOpponent, SlidingPlayer
 from sklearn.linear_model import LinearRegression
 
 
@@ -70,11 +70,11 @@ class Game():
 
 
 if __name__ == '__main__':
-    turns = 20
+    turns = 100
 
     model = LinearRegression()  # simple example
 
-    you = ConstantPlayer(1)
+    you = QuadSlidingPlayer(1)
     smart = SmartOpponent(you, model)
 
     game = Game(you, smart, turns)
