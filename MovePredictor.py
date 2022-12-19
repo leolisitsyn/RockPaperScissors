@@ -13,10 +13,10 @@ class Predictor():
 
         length = len(pl_moves)
 
-        X = np.zeros((length, 3))
-        y = np.zeros((length - 1, 3))
+        # X = np.zeros((length, 3))
+        # y = np.zeros((length, 3))
 
-        for i in range(length):
+        """for i in range(length):
             X[i][pl_moves[i]] = 1
 
         for i in range(length - 1):
@@ -25,13 +25,18 @@ class Predictor():
             elif pl_moves[i] == 1:
                 y[i][0] = 1
             else:
-                y[i][1] = 1
-        return X, y
+                y[i][1] = 1"""
+
+        ddict = {0:2, 1:0, 2:1}
+        y = [ddict[x] for x in pl_moves]
+        return y
 
     def fit_predict(self):
-        X, y = self.process_moves()
+        y = self.process_moves()
+        move_nums = np.array(range(len(y))).reshape((-1, 1))
 
-        self.model.fit(X[:-1], y)
-        pred = self.model.predict([X[:-1]])
+        self.model.fit(move_nums, y)
+        pred = self.model.predict(np.array(len(y), ndmin=2))
 
-        return np.argmax(pred)
+
+        return int(pred)

@@ -127,7 +127,7 @@ class SmartOpponent(Player):
         self.predictor = Predictor(player, self, model)
 
     def move(self):
-        if len(self.opponent.moves) < 3:
+        if len(self.opponent.moves) < 5:
             step = np.random.randint(0, 3)
         else:
             step = self.predictor.fit_predict()
