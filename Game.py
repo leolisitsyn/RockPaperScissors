@@ -1,6 +1,6 @@
 from Players import You, QuadSlidingPlayer, SmartOpponent, SlidingPlayer, ConstantPlayer
 
-from sklearn.linear_model import LinearRegression, LogisticRegression
+from sklearn.linear_model import LogisticRegression
 
 
 
@@ -76,7 +76,7 @@ if __name__ == '__main__':
 
     model = LogisticRegression()  # simple example
 
-    you = QuadSlidingPlayer(0)
+    you = SlidingPlayer(0)
     smart = SmartOpponent(you, model)
 
     game = Game(you, smart, turns)
